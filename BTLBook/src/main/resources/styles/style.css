@@ -1,0 +1,13 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+
+}
+Pane {
+    -fx-background-color: lightblue;
+    -fx-font-family: Tahoma;
+    -fx-padding: 10;
+    -fx-hgap: 5;
+}
