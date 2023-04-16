@@ -17,7 +17,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.stage.Window;
 
@@ -27,8 +26,8 @@ import javafx.stage.Window;
  * @author Admin
  */
 public class FXMLRegisterController implements Initializable {
-    @FXML
-    private TextField txtID;
+
+    
     @FXML
     private TextField txtUserName;
     @FXML
@@ -38,23 +37,23 @@ public class FXMLRegisterController implements Initializable {
     @FXML
     private TextField txtLastName;
     @FXML
-    private TextField txtSDT;
-    @FXML
     private TextField txtAddress;    
     @FXML
     private PasswordField txtNhapLaiMatKhau;
     @FXML
-    private Button submitButton;
+    private Button btnDangKy;
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    public void register(ActionEvent event) throws SQLException, IOException {
-        Window owner = submitButton.getScene().getWindow();
+    public void dangKy(ActionEvent event) throws SQLException, IOException {
+        Window owner = btnDangKy.getScene().getWindow();
 
         User user = new User();
         
@@ -63,7 +62,6 @@ public class FXMLRegisterController implements Initializable {
         user.setPassWord(txtPassWord.getText());
         user.setFirstName(txtFirstName.getText());
         user.setLastName(txtLastName.getText());
-        user.setSdt(txtSDT.getText());
         user.setAddress(txtAddress.getText());
         UserService u = new UserService();
         if (txtUserName.getText().isEmpty()) {
@@ -84,10 +82,6 @@ public class FXMLRegisterController implements Initializable {
 
         if (txtAddress.getText().isEmpty()) {
             Utils.showAlert(Alert.AlertType.ERROR, owner, "Lỗi!", "Chưa nhập địa chỉ của bạn");
-            return;
-        }
-        if (txtSDT.getText().isEmpty()) {
-            Utils.showAlert(Alert.AlertType.ERROR, owner, "Lỗi!", "Chưa nhập sđt của bạn");
             return;
         }
 

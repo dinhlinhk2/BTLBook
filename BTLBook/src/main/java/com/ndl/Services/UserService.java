@@ -6,6 +6,7 @@ package com.ndl.Services;
 
 import com.ndl.pojo.User;
 import com.ndl.utils.JdbcUtils;
+import com.ndl.utils.Utils;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -13,6 +14,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javafx.scene.control.Alert;
 
 /**
  *
@@ -22,13 +24,13 @@ public class UserService {
     
     public static boolean checkUsernameExist(String username) throws SQLException {
         try (Connection conn = JdbcUtils.getConn()) {
-            PreparedStatement stm = conn.prepareStatement("SELECT `Username` FROM `users` WHERE `Username` = ?");
+            PreparedStatement stm = conn.prepareStatement("SELECT `Username` FROM `user` WHERE `Username` = ?");
             
             stm.setString(1, username);
             ResultSet rs = stm.executeQuery();
             
             if (rs.isBeforeFirst()) {
-                //Utils.getBox("Trùng tên tài khoản!", Alert.AlertType.INFORMATION).show();
+                Utils.getBox("Trùng tên tài khoản!", Alert.AlertType.INFORMATION).show();
                 return true;
             }
             return false;
@@ -56,7 +58,7 @@ public class UserService {
     }
     public User dangNhap(User user) throws SQLException{
         try (Connection conn = JdbcUtils.getConn()) {
-                PreparedStatement stm = conn.prepareStatement("SELECT * FROM `users`"
+                PreparedStatement stm = conn.prepareStatement("SELECT * FROM `user`"
                         + " WHERE `Username` = ? and `Password` = ? ");
 
                 stm.setString(1, user.getUserName());
@@ -72,9 +74,7 @@ public class UserService {
                     newUser.setUserName(rs.getString("Username"));
                     newUser.setFirstName(rs.getString("FirstName"));
                     newUser.setLastName(rs.getString("LastName"));
-                    newUser.setSdt(rs.getString("SDT"));
-                    newUser.setAddress(rs.getString("Address"));
-                    
+                    newUser.setAddress(rs.getString("Address"));  
                     break;
                 }
                 
@@ -84,24 +84,22 @@ public class UserService {
     public boolean dangKy(User user) throws SQLException {
         if(checkUsernameExist(user.getUserName()) == false){
             try (Connection conn = JdbcUtils.getConn()){
-            PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO `users` "
-                    + "(ID, Username, Password, FirstName,LastName, Gender,Address)"
-                      + "VALUES(?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO `user` "
+                    + "(ID, Username, Password, FirstName, LastName, Address)"
+                      + "VALUES(?, ?, ?, ?, ?, ?)");
             
             preparedStatement.setInt(1, user.getId());
             preparedStatement.setString(2, user.getUserName());
             preparedStatement.setString(3, getMd5(user.getPassWord()));
             preparedStatement.setString(4, user.getFirstName());
             preparedStatement.setString(5, user.getLastName());
-            preparedStatement.setString(6, user.getSdt());
-            preparedStatement.setString(7, user.getAddress());
-            
-            preparedStatement.executeUpdate();
-            //Utils.getBox("Đăng ký tài khoản thành công!", Alert.AlertType.INFORMATION).show();
+            preparedStatement.setString(6, user.getAddress());
+            preparedStatement.executeUpdate();  
+            Utils.getBox("Đăng ký tài khoản thành công!", Alert.AlertType.INFORMATION).show();
             return true;
         }
         }else{
-            //Utils.getBox("Đăng ký tài khoản thất bại!", Alert.AlertType.INFORMATION).show();
+            Utils.getBox("Đăng ký tài khoản thất bại!", Alert.AlertType.INFORMATION).show();
             return false;
         }
     }

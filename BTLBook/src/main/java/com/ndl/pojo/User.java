@@ -4,6 +4,7 @@
  */
 package com.ndl.pojo;
 
+
 /**
  *
  * @author Admin
@@ -14,20 +15,20 @@ public class User {
     private String passWord;
     private String firstName;
     private String lastName;
-    private String sdt;
     private String address;
 
+    
+    
     public User() {
         
     }
 
-    public User(Integer id, String userName, String passWord, String firstName, String lastName, String sdt, String address) {
+    public User(Integer id, String userName, String passWord, String firstName, String lastName, String address) {
         this.id = id;
         this.userName = userName;
         this.passWord = passWord;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.sdt = sdt;
         this.address = address;
     }
 
@@ -101,19 +102,7 @@ public class User {
         this.lastName = lastName;
     }
 
-    /**
-     * @return the sdt
-     */
-    public String getSdt() {
-        return sdt;
-    }
-
-    /**
-     * @param sdt the sdt to set
-     */
-    public void setSdt(String sdt) {
-        this.sdt = sdt;
-    }
+ 
 
     /**
      * @return the address
