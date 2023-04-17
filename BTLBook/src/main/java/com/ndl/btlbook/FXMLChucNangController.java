@@ -49,5 +49,15 @@ public class FXMLChucNangController implements Initializable {
         stage.show();
         
     }
-    
+    public void dkDGHandler(ActionEvent evt) throws IOException {
+        
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("FXMLDocGia.fxml"));
+
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Doc Gia");
+        stage.show();
+        
+    }
 }

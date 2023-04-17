@@ -4,7 +4,8 @@
  */
 package com.ndl.Services;
 
-import com.ndl.pojo.TheLoai;
+
+import com.ndl.pojo.DoiTuong;
 import com.ndl.utils.JdbcUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,44 +14,43 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  *
  * @author Admin
  */
-public class TheLoaiService {
-    public List<TheLoai> getListTheLoai() throws SQLException{
+public class DoiTuongService {
+    public List<DoiTuong> getListDoiTuong() throws SQLException{
         try (Connection conn = JdbcUtils.getConn()) {
-            PreparedStatement stm = conn.prepareStatement("SELECT * FROM theloai");
+            PreparedStatement stm = conn.prepareStatement("SELECT * FROM doituong");
             
             ResultSet rs = stm.executeQuery();
-            List<TheLoai> listTL = new ArrayList<>();
+            List<DoiTuong> listDT = new ArrayList<>();
             
             while (rs.next()) {                
-                int maTL = rs.getInt("MaTheLoai");
-                String nameTL = rs.getString("TenTheLoai");
+                int maDT = rs.getInt("MaDoiTuong");
+                String tenDT = rs.getString("TenDoiTuong");
                 
-                listTL.add(new TheLoai(maTL, nameTL));
+                listDT.add(new DoiTuong(maDT,tenDT));
             }
             
-            return listTL;
+            return listDT;
         }
     }
-    public static TheLoai getTheLoaiById(Integer maTL) throws SQLException{
+    public static DoiTuong getDoiTuongById(Integer maDT) throws SQLException{
         try (Connection conn = JdbcUtils.getConn()) {
-            PreparedStatement stm = conn.prepareStatement("SELECT * FROM `theloai` WHERE `MaTheLoai` = ?");
-            stm.setInt(1, maTL);
+            PreparedStatement stm = conn.prepareStatement("SELECT * FROM `doituong` WHERE `MaDoiTuong` = ?");
+            stm.setInt(1, maDT);
             ResultSet rs = stm.executeQuery();
             
-            TheLoai tl = null;
+            DoiTuong dt = null;
             while (rs.next()) {
-                tl = new TheLoai();
-                tl.setId(rs.getInt("MaTheLoai"));
-                tl.setTenTL(rs.getString("TenTheLoai"));
+                dt = new DoiTuong();
+                dt.setId(rs.getInt("MaDoiTuong"));
+                dt.setTenDT(rs.getString("TenDoiTuong"));
                 break;
             }
             
-            return tl;
+            return dt;
         }
         
     }

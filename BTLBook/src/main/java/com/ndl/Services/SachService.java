@@ -163,7 +163,7 @@ public class SachService {
     }
 
     public boolean suaSach(Sach sach) throws SQLException {
-        if (sach.getId() != 0) {
+        if (sach.getId() != 0 && checkSachExist(sach.getTenSach()) == false) {
             try (Connection conn = JdbcUtils.getConn()) {
                 conn.setAutoCommit(false);
 
