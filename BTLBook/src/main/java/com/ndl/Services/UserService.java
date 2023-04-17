@@ -70,7 +70,7 @@ public class UserService {
                 while (rs.next()) {
                     newUser = new User();
                      
-//                    newUser.setId(rs.getInt("ID"));
+                    newUser.setId(rs.getInt("ID"));
                     newUser.setUserName(rs.getString("Username"));
                     newUser.setFirstName(rs.getString("FirstName"));
                     newUser.setLastName(rs.getString("LastName"));
