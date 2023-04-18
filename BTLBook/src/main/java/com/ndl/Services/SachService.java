@@ -33,8 +33,9 @@ public class SachService {
                 Integer namXB = rs.getInt("NamXB");
                 Integer sl = rs.getInt("SoLuong");
                 Float gia = rs.getFloat("GiaTien");
+                Integer maKS = rs.getInt("MaKeSach");
 
-                listSach.add(new Sach(maSach, tenSach, maTL, namXB, sl, gia));
+                listSach.add(new Sach(maSach, tenSach, maTL, namXB, sl, gia, maKS));
             }
         return listSach;
     }
@@ -130,6 +131,7 @@ public class SachService {
                 sach.setNamXB(rs.getInt("NamXB"));
                 sach.setSoLuong(rs.getInt("SoLuong"));
                 sach.setGia(rs.getFloat("Gia"));
+                sach.setMaKS(rs.getInt("MaKeSach"));
 
                 break;
             }
@@ -144,8 +146,8 @@ public class SachService {
                 conn.setAutoCommit(false);
 
                 PreparedStatement stm = conn.prepareStatement("INSERT INTO `sach` "
-                        + "(MaSach, TenSach, MaTheLoai, NamXB, SoLuong, GiaTien)"
-                        + "VALUES(?, ?, ?, ?, ?, ?)"); 
+                        + "(MaSach, TenSach, MaTheLoai, NamXB, SoLuong, GiaTien, MaKeSach)"
+                        + "VALUES(?, ?, ?, ?, ?, ?, ?)"); 
 
                 stm.setInt(1, sach.getId());
                 stm.setString(2, sach.getTenSach());
@@ -153,6 +155,7 @@ public class SachService {
                 stm.setInt(4, sach.getNamXB());
                 stm.setInt(5, sach.getSoLuong());
                 stm.setFloat(6, sach.getGia());
+                stm.setInt(7, sach.getMaKS());
                 stm.executeUpdate();
                 conn.commit();
 
@@ -172,7 +175,8 @@ public class SachService {
                                 + "`MaTheLoai` = ?, "
                                 + "`NamXB` = ?, "
                                 + "`SoLuong` = ?, "
-                                + "`GiaTien` = ? "
+                                + "`GiaTien` = ?, "
+                                + "`MaKeSach` = ? "
                                 + "WHERE `MaSach` = ?");
 
                 stm.setString(1, sach.getTenSach());
@@ -180,7 +184,8 @@ public class SachService {
                 stm.setInt(3, sach.getNamXB());
                 stm.setInt(4, sach.getSoLuong());
                 stm.setFloat(5, sach.getGia());
-                stm.setInt(6, sach.getId());  
+                stm.setInt(6, sach.getMaKS());
+                stm.setInt(7, sach.getId());  
                 
                 int affectedRow = stm.executeUpdate();
                 conn.commit();

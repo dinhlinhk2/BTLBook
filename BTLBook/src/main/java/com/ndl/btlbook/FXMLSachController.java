@@ -6,6 +6,8 @@ package com.ndl.btlbook;
 
 import com.ndl.Services.SachService;
 import com.ndl.Services.TheLoaiService;
+import com.ndl.pojo.KeSach;
+import com.ndl.Services.KeSachService;
 import com.ndl.pojo.Sach;
 import com.ndl.pojo.TheLoai;
 import com.ndl.utils.Utils;
@@ -51,6 +53,8 @@ public class FXMLSachController implements Initializable {
     @FXML
     private TextField txtGia;
     @FXML
+    private ComboBox<KeSach> cbKeSach;
+    @FXML
     private Button btnThem;
 
     @FXML
@@ -75,6 +79,7 @@ public class FXMLSachController implements Initializable {
             Logger.getLogger(FXMLSachController.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.loadComboBoxTheLoai();
+        this.loadComboBoxKeSach();
         this.btnLamMoi.setOnAction(e -> {
             try {
                 refresh();
@@ -103,6 +108,12 @@ public class FXMLSachController implements Initializable {
                 this.txtNamXB.setText(Integer.toString(tbSach.getSelectionModel().getSelectedItem().getNamXB()));
                 this.txtSL.setText(Integer.toString(tbSach.getSelectionModel().getSelectedItem().getSoLuong()));
                 this.txtGia.setText(Float.toString(tbSach.getSelectionModel().getSelectedItem().getGia()));
+                int maKe = tbSach.getSelectionModel().getSelectedItem().getMaKS();
+                try {
+                    KeSach ks = KeSachService.getKeSachById(maKe);
+                    this.cbKeSach.setValue(ks);
+                } catch (SQLException e) {
+                }
 
             }
         });
@@ -155,6 +166,7 @@ public class FXMLSachController implements Initializable {
         this.txtNamXB.clear();
         this.txtSL.clear();
         this.txtGia.clear();
+        this.cbKeSach.setValue(null);
         this.cbTimKiem.getSelectionModel().select(0);
         this.txtTimKiem.clear();
     }
@@ -172,6 +184,15 @@ public class FXMLSachController implements Initializable {
         TheLoaiService s = new TheLoaiService();
         try {
             this.cbTheLoai.setItems(FXCollections.observableArrayList(s.getListTheLoai()));
+        } catch (SQLException ex) {
+            Logger.getLogger(FXMLSachController.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+    }
+    private void loadComboBoxKeSach() {
+        KeSachService s = new KeSachService();
+        try {
+            this.cbKeSach.setItems(FXCollections.observableArrayList(s.getListKeSach()));
         } catch (SQLException ex) {
             Logger.getLogger(FXMLSachController.class.getName()).log(Level.SEVERE, null, ex);
 
@@ -196,9 +217,12 @@ public class FXMLSachController implements Initializable {
 
         TableColumn col6 = new TableColumn("Gia");
         col6.setCellValueFactory(new PropertyValueFactory("gia"));
+        
+        TableColumn col7 = new TableColumn("Ke Sach");
+        col7.setCellValueFactory(new PropertyValueFactory("maKS"));
 
-        TableColumn col7 = new TableColumn("");
-        col7.setCellFactory(param -> new TableCell<Sach, String>() {
+        TableColumn col8 = new TableColumn("");
+        col8.setCellFactory(param -> new TableCell<Sach, String>() {
             final Button btnXoa = new Button("Xóa");
 
             @Override
@@ -234,7 +258,7 @@ public class FXMLSachController implements Initializable {
             }
         });
 
-        this.tbSach.getColumns().addAll(col1, col2, col3, col4, col5, col6, col7);
+        this.tbSach.getColumns().addAll(col1, col2, col3, col4, col5, col6, col7, col8);
     }
 
     public void themSachHandler(ActionEvent evt) throws SQLException {
@@ -244,6 +268,7 @@ public class FXMLSachController implements Initializable {
         sach.setTenSach(txtTenSach.getText());
         sach.setSoLuong(parseIntOrNull(txtSL.getText()));
         sach.setNamXB(parseIntOrNull(txtNamXB.getText()));
+        
         
 
         Window owner = btnThem.getScene().getWindow();
@@ -280,6 +305,12 @@ public class FXMLSachController implements Initializable {
         } else {
             Utils.showAlert(Alert.AlertType.ERROR, owner, "Lỗi!", "Chưa nhập giá");
         }
+        if (cbKeSach.getValue() == null) {
+            Utils.showAlert(Alert.AlertType.ERROR, owner, "Lỗi!", "Chưa nhập kệ sách");
+            return;
+        } else {
+            sach.setMaKS(cbKeSach.getSelectionModel().getSelectedItem().getMaKe());
+        }
 
         SachService s = new SachService();
         if (s.themSach(sach) == true) {
@@ -303,6 +334,9 @@ public class FXMLSachController implements Initializable {
             sach.setNamXB(parseIntOrNull(txtNamXB.getText()));
             sach.setSoLuong(parseIntOrNull(txtSL.getText()));
             sach.setGia(parseFloatOrNull(txtGia.getText()));
+            sach.setMaKS(1);
+            if(cbKeSach.getValue() != null)
+                sach.setMaKS(cbKeSach.getSelectionModel().getSelectedItem().getMaKe());
             
             SachService s = new SachService();
 

@@ -20,6 +20,7 @@ import javafx.scene.control.Alert;
  *
  * @author Admin
  */
+
 public class UserService {
     
     public static boolean checkUsernameExist(String username) throws SQLException {
@@ -101,6 +102,54 @@ public class UserService {
         }else{
             Utils.getBox("Đăng ký tài khoản thất bại!", Alert.AlertType.INFORMATION).show();
             return false;
+        }
+    }
+    public static User getUserById(Integer maUser) throws SQLException {
+        try (Connection conn = JdbcUtils.getConn()) {
+            PreparedStatement stm = conn.prepareStatement("SELECT * FROM `user` WHERE `ID` = ?");
+            stm.setInt(1, maUser);
+            ResultSet rs = stm.executeQuery();
+            
+            User user = null;
+            while (rs.next()) {
+                user = new User();
+                
+                user.setId(rs.getInt("ID"));
+                user.setUserName(rs.getString("Username"));
+                user.setPassWord(rs.getString("Password"));
+                user.setFirstName(rs.getString("FirstName"));
+                user.setLastName(rs.getString("LastName"));
+                user.setAddress(rs.getString("Address"));
+                
+               
+                break;
+            }
+            
+            return user;
+        }
+    }
+    public static User getUserByUserName(String username) throws SQLException {
+        try (Connection conn = JdbcUtils.getConn()) {
+            PreparedStatement stm = conn.prepareStatement("SELECT * FROM `user` WHERE `Username` = ?");
+            stm.setString(1, username);
+            ResultSet rs = stm.executeQuery();
+            
+            User user = null;
+            while (rs.next()) {
+                user = new User();
+                
+                user.setId(rs.getInt("ID"));
+                user.setUserName(rs.getString("Username"));
+                user.setPassWord(rs.getString("Password"));
+                user.setFirstName(rs.getString("FirstName"));
+                user.setLastName(rs.getString("LastName"));
+                user.setAddress(rs.getString("Address"));
+                
+               
+                break;
+            }
+            
+            return user;
         }
     }
     

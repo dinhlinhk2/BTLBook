@@ -15,17 +15,19 @@ public class Sach {
     private Integer namXB;
     private Integer soLuong;
     private Float gia;
+    private Integer maKS;
     
     public Sach(){ 
         
     }
-    public Sach(Integer id, String tenSach, Integer maTL, Integer namXB, Integer soLuong, Float gia){
+    public Sach(Integer id, String tenSach, Integer maTL, Integer namXB, Integer soLuong, Float gia, Integer maKS){
         this.id = id;
         this.tenSach = tenSach;
         this.maTL = maTL;
         this.namXB = namXB;
         this.soLuong = soLuong;
         this.gia = gia;
+        this.maKS = maKS;
     }
 
     /**
@@ -111,6 +113,20 @@ public class Sach {
      */
     public void setGia(Float gia) {
         this.gia = gia;
+    }
+
+    /**
+     * @return the maKS
+     */
+    public Integer getMaKS() {
+        return maKS;
+    }
+
+    /**
+     * @param maKS the maKS to set
+     */
+    public void setMaKS(Integer maKS) {
+        this.maKS = maKS;
     }
     
 }
