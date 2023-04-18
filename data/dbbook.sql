@@ -161,8 +161,9 @@ CREATE TABLE `sach` (
   `SoLuong` int NOT NULL,
   `GiaTien` float NOT NULL,
   `MaKeSach` int NOT NULL,
-  PRIMARY KEY (`MaSach`,`MaTheLoai`,`MaKeSach`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `MaTacGia` int NOT NULL,
+  PRIMARY KEY (`MaSach`,`MaTheLoai`,`MaKeSach`,`MaTacGia`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -171,8 +172,33 @@ CREATE TABLE `sach` (
 
 LOCK TABLES `sach` WRITE;
 /*!40000 ALTER TABLE `sach` DISABLE KEYS */;
-INSERT INTO `sach` VALUES (1,'code',1,203,10,20000,0),(2,'code2',2,204,20,200000,0),(4,'code3',2,205,100,50000,0),(5,'code4',1,206,2,20000,0),(9,'code6',1,2006,3,20770,2);
+INSERT INTO `sach` VALUES (1,'code',1,203,10,20000,0,0),(2,'code2',2,204,20,200000,0,0),(4,'code3',2,205,100,50000,0,0),(11,'code4',2,2003,10,300000,2,3);
 /*!40000 ALTER TABLE `sach` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tacgia`
+--
+
+DROP TABLE IF EXISTS `tacgia`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tacgia` (
+  `MaTacGia` int NOT NULL AUTO_INCREMENT,
+  `TenTacGia` varchar(45) NOT NULL,
+  `NgaySinh` date NOT NULL,
+  PRIMARY KEY (`MaTacGia`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tacgia`
+--
+
+LOCK TABLES `tacgia` WRITE;
+/*!40000 ALTER TABLE `tacgia` DISABLE KEYS */;
+INSERT INTO `tacgia` VALUES (1,'linh','2002-01-17'),(2,'duy','2002-02-23'),(3,'duc','2002-03-14');
+/*!40000 ALTER TABLE `tacgia` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -186,7 +212,7 @@ CREATE TABLE `theloai` (
   `MaTheLoai` int NOT NULL AUTO_INCREMENT,
   `TenTheLoai` varchar(45) NOT NULL,
   PRIMARY KEY (`MaTheLoai`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -195,7 +221,7 @@ CREATE TABLE `theloai` (
 
 LOCK TABLES `theloai` WRITE;
 /*!40000 ALTER TABLE `theloai` DISABLE KEYS */;
-INSERT INTO `theloai` VALUES (1,'Hài'),(2,'Cười');
+INSERT INTO `theloai` VALUES (1,'Hài'),(2,'Cười'),(3,'Hài');
 /*!40000 ALTER TABLE `theloai` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -264,4 +290,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-18 11:00:44
+-- Dump completed on 2023-04-18 22:30:00

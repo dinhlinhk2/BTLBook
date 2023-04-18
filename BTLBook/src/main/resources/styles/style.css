@@ -6,8 +6,37 @@
 
 }
 Pane {
-    -fx-background-color: lightblue;
+    -fx-background-color: pink;
     -fx-font-family: Tahoma;
     -fx-padding: 10;
     -fx-hgap: 5;
+}
+VBox {
+    -fx-background-color: lightblue;
+    -fx-font-family: Tahoma;
+    -fx-padding: 10;
+    -fx-spacing: 10;
+    -fx-alignment: CENTER;
+}
+
+HBox {
+    -fx-spacing: 5;
+}
+
+Button {
+    -fx-background-color: blue;
+    -fx-text-fill: white;
+}
+GridPane {
+    -fx-background-color: lightblue;
+    -fx-font-family: Tahoma;
+    -fx-padding: 10;
+    -fx-hgap: 10;
+}
+
+ Text.Subject{
+    -fx-fill: red;
+    -fx-stroke: gold;
+    -fx-stroke-width: 3;
+    -fx-font-size: 30;
 }

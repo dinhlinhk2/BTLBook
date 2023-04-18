@@ -9,6 +9,8 @@ import com.ndl.Services.TheLoaiService;
 import com.ndl.pojo.KeSach;
 import com.ndl.Services.KeSachService;
 import com.ndl.pojo.Sach;
+import com.ndl.pojo.TacGia;
+import com.ndl.Services.TacGiaService;
 import com.ndl.pojo.TheLoai;
 import com.ndl.utils.Utils;
 import java.net.URL;
@@ -54,6 +56,8 @@ public class FXMLSachController implements Initializable {
     private TextField txtGia;
     @FXML
     private ComboBox<KeSach> cbKeSach;
+    @FXML 
+    private ComboBox<TacGia> cbTacGia;
     @FXML
     private Button btnThem;
 
@@ -80,6 +84,7 @@ public class FXMLSachController implements Initializable {
         }
         this.loadComboBoxTheLoai();
         this.loadComboBoxKeSach();
+        this.loadComboBoxTacGia();
         this.btnLamMoi.setOnAction(e -> {
             try {
                 refresh();
@@ -112,6 +117,12 @@ public class FXMLSachController implements Initializable {
                 try {
                     KeSach ks = KeSachService.getKeSachById(maKe);
                     this.cbKeSach.setValue(ks);
+                } catch (SQLException e) {
+                }
+                int maTG = tbSach.getSelectionModel().getSelectedItem().getMaTG();
+                try {
+                    TacGia tg = TacGiaService.getTacGiaById(maTG);
+                    this.cbTacGia.setValue(tg);
                 } catch (SQLException e) {
                 }
 
@@ -167,6 +178,7 @@ public class FXMLSachController implements Initializable {
         this.txtSL.clear();
         this.txtGia.clear();
         this.cbKeSach.setValue(null);
+        this.cbTacGia.setValue(null);
         this.cbTimKiem.getSelectionModel().select(0);
         this.txtTimKiem.clear();
     }
@@ -198,6 +210,15 @@ public class FXMLSachController implements Initializable {
 
         }
     }
+    private void loadComboBoxTacGia() {
+        TacGiaService s = new TacGiaService();
+        try {
+            this.cbTacGia.setItems(FXCollections.observableArrayList(s.getListTacGia()));
+        } catch (SQLException ex) {
+            Logger.getLogger(FXMLSachController.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+    }
 
     private void loadTableSach() {
         TableColumn col1 = new TableColumn("Ma Sach");
@@ -220,9 +241,12 @@ public class FXMLSachController implements Initializable {
         
         TableColumn col7 = new TableColumn("Ke Sach");
         col7.setCellValueFactory(new PropertyValueFactory("maKS"));
+        
+        TableColumn col8 = new TableColumn("Tac Gia");
+        col8.setCellValueFactory(new PropertyValueFactory("maTG"));
 
-        TableColumn col8 = new TableColumn("");
-        col8.setCellFactory(param -> new TableCell<Sach, String>() {
+        TableColumn col9 = new TableColumn("");
+        col9.setCellFactory(param -> new TableCell<Sach, String>() {
             final Button btnXoa = new Button("Xóa");
 
             @Override
@@ -258,7 +282,7 @@ public class FXMLSachController implements Initializable {
             }
         });
 
-        this.tbSach.getColumns().addAll(col1, col2, col3, col4, col5, col6, col7, col8);
+        this.tbSach.getColumns().addAll(col1, col2, col3, col4, col5, col6, col7, col8, col9);
     }
 
     public void themSachHandler(ActionEvent evt) throws SQLException {
@@ -311,6 +335,12 @@ public class FXMLSachController implements Initializable {
         } else {
             sach.setMaKS(cbKeSach.getSelectionModel().getSelectedItem().getMaKe());
         }
+        if (cbTacGia.getValue() == null) {
+            Utils.showAlert(Alert.AlertType.ERROR, owner, "Lỗi!", "Chưa nhập tác giả");
+            return;
+        } else {
+            sach.setMaTG(cbTacGia.getSelectionModel().getSelectedItem().getMaTG());
+        }
 
         SachService s = new SachService();
         if (s.themSach(sach) == true) {
@@ -337,6 +367,8 @@ public class FXMLSachController implements Initializable {
             sach.setMaKS(1);
             if(cbKeSach.getValue() != null)
                 sach.setMaKS(cbKeSach.getSelectionModel().getSelectedItem().getMaKe());
+            if(cbTacGia.getValue() != null)
+                sach.setMaTG(cbTacGia.getSelectionModel().getSelectedItem().getMaTG());
             
             SachService s = new SachService();
 

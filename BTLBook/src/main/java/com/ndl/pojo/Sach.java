@@ -16,11 +16,12 @@ public class Sach {
     private Integer soLuong;
     private Float gia;
     private Integer maKS;
+    private Integer maTG;
     
     public Sach(){ 
         
     }
-    public Sach(Integer id, String tenSach, Integer maTL, Integer namXB, Integer soLuong, Float gia, Integer maKS){
+    public Sach(Integer id, String tenSach, Integer maTL, Integer namXB, Integer soLuong, Float gia, Integer maKS, Integer maTG){
         this.id = id;
         this.tenSach = tenSach;
         this.maTL = maTL;
@@ -28,6 +29,7 @@ public class Sach {
         this.soLuong = soLuong;
         this.gia = gia;
         this.maKS = maKS;
+        this.maTG = maTG;
     }
 
     /**
@@ -127,6 +129,20 @@ public class Sach {
      */
     public void setMaKS(Integer maKS) {
         this.maKS = maKS;
+    }
+
+    /**
+     * @return the maTG
+     */
+    public Integer getMaTG() {
+        return maTG;
+    }
+
+    /**
+     * @param maTG the maTG to set
+     */
+    public void setMaTG(Integer maTG) {
+        this.maTG = maTG;
     }
     
 }

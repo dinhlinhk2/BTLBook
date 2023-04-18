@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ndl.btlbook.FXMLLoginController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" stylesheets="@../../../styles/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ndl.btlbook.FXMLLoginController">
    <children>
       <Pane prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -24,7 +24,7 @@
             </Label>
             <TextField fx:id="txtuserName" layoutX="241.0" layoutY="70.0" prefHeight="25.0" prefWidth="189.0" />
             <PasswordField fx:id="txtpass" layoutX="241.0" layoutY="127.0" prefHeight="25.0" prefWidth="189.0" />
-            <Label layoutX="220.0" layoutY="14.0" text="Đăng Nhập" textAlignment="CENTER">
+            <Label layoutX="220.0" layoutY="14.0" stylesheets="@../../../styles/style.css" text="Đăng Nhập" textAlignment="CENTER">
                <font>
                   <Font size="24.0" />
                </font>
