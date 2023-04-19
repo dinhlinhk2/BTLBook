@@ -7,6 +7,7 @@ package com.ndl.Services;
 import com.ndl.pojo.DocGia;
 import com.ndl.pojo.Sach;
 import com.ndl.pojo.PhieuMuon;
+import com.ndl.pojo.ThongKe;
 import com.ndl.pojo.User;
 import com.ndl.utils.JdbcUtils;
 import java.sql.Connection;
@@ -41,9 +42,6 @@ public class PhieuMuonService {
             PreparedStatement stm;
 
             for(PhieuMuon phieuMuon: dsMuon) {
-//                stm = conn.prepareStatement(
-//                    "INSERT INTO `phieumuon`(`MaPhieu`, `ID_NM`, `MaSach`, `SoLuongMuon`, `GiaTien`, `MaNV`, `NgayMuon`) "
-//                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
                 stm = conn.prepareStatement("INSERT INTO `phieumuon` "
                         + "(MaPhieu, ID_NM, MaSach, SoLuongMuon, GiaTien, MaNV, NgayMuon)"
                         + "VALUES(?, ?, ?, ?, ?, ?, ?)"); 
@@ -91,25 +89,47 @@ public class PhieuMuonService {
             return listMuon;
         }
     }
-//    public static PhieuMuon getPhieuMuonById(Integer maPM) throws SQLException{
-//        try (Connection conn = JdbcUtils.getConn()) {
-//            PreparedStatement stm = conn.prepareStatement("SELECT * FROM `phieumuon` WHERE `MaPhieu` = ?");
-//            stm.setInt(1, maPM);
-//            ResultSet rs = stm.executeQuery();
-//            
-//            PhieuMuon pm= null;
-//            while (rs.next()) {
-//                pm = new PhieuMuon();
-//                pm.setMaSach(rs.getInt("MaSach"));
-//                pm.setMaDG(rs.getInt("MaDocGia"));
-//                
-//                pm.setMaPhieu(rs.getInt("MaPhieu"));
-//                break;
-//            }
-//            
-//            return pm;
-//        }
-//        
-//    }
+    public ThongKe sumSellByYear(Integer nam) throws SQLException {
+        try (Connection conn = JdbcUtils.getConn()) {
+            ThongKe tk = null;
+            
+            PreparedStatement stm = conn.prepareStatement(
+                    "SELECT SUM(`SoLuongMuon`) AS 'tong_so_luong', "
+                            + "EXTRACT(YEAR FROM `NgayMuon`) AS 'year' "
+                            + "FROM `phieumuon` "
+                            + "WHERE EXTRACT(YEAR FROM `NgayMuon`) = ? ");
+            
+            stm.setInt(1, nam);
+            
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                tk = new ThongKe();
+                tk.setTongSL(rs.getInt("tong_so_luong"));
+                tk.setNam(rs.getInt("year"));
+            }
+            return tk;
+        }
+    }
+    public ThongKe sumSellByGia(Integer gia) throws SQLException {
+        try (Connection conn = JdbcUtils.getConn()) {
+            ThongKe tk = null;
+            
+            PreparedStatement stm = conn.prepareStatement(
+                    "SELECT SUM(`GiaTien`) AS 'tonggia', "
+                            + "FROM `phieumuon` "
+                            + "WHERE `GiaTien` >0 ");
+            
+            stm.setInt(1, gia);
+            
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                tk = new ThongKe();
+                tk.setTongSL(rs.getInt("tonggia"));
+//                tk.setNam(rs.getInt("gia"));
+            }
+            return tk;
+        }
+    }
+
     
 }

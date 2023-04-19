@@ -30,7 +30,7 @@
                   <Font size="24.0" />
                </font>
             </Button>
-            <Button layoutX="359.0" layoutY="185.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="167.0" text="Thống kê">
+            <Button layoutX="359.0" layoutY="185.0" mnemonicParsing="false" onAction="#thongKeHandler" prefHeight="51.0" prefWidth="167.0" text="Thống kê">
                <font>
                   <Font size="24.0" />
                </font>

@@ -129,7 +129,7 @@ public class FXMLPhieuMuonController implements Initializable {
                     this.cbTacGia.setValue(tg);
                 } catch (SQLException e) {
                 }
-                this.txtSL.setText(Integer.toString(tbSach.getSelectionModel().getSelectedItem().getId()));
+                this.txtSL.setText(Integer.toString(tbSach.getSelectionModel().getSelectedItem().getSoLuong()));
 
             }
         });
@@ -265,16 +265,6 @@ public class FXMLPhieuMuonController implements Initializable {
                     btnChonSach.setOnAction(event -> {
 
                         Sach sach = getTableView().getItems().get(getIndex());
-
-//                        PhieuMuon pm = new PhieuMuon();
-//                        pm.setMaPhieu(pm.getMaPhieu());
-//                        pm.setMaSach(sach);
-//                        pm.setMaDG(pm.getMaDG());
-//                        pm.setGia(pm.getGia());
-//                       
-//                        pm.setNgayMuon(Date.valueOf(pm.toString()));
-//                        pm.setMaNV(user);
-//                        pm.setSoLuong(1);
                         Window owner = btnChonSach.getScene().getWindow();
                         PhieuMuon pm = new PhieuMuon();
                         pm.setMaPhieu(0);
@@ -292,7 +282,7 @@ public class FXMLPhieuMuonController implements Initializable {
                             pm.setMaNV(cbNV.getSelectionModel().getSelectedItem().getId());
                         }
                         pm.setSoLuong(1);
-                        pm.setGia(Float.parseFloat(txtgia.getText()));
+                        pm.setGia(Float.valueOf(txtgia.getText()));
                         pm.setNgayMuon(pm.getNgayMuon());
 
                         int rowIndex = getRowIndex(tbPhieuMuon, pm);
@@ -327,7 +317,7 @@ public class FXMLPhieuMuonController implements Initializable {
         TableColumn col1 = new TableColumn("Ma Phieu");
         col1.setCellValueFactory(new PropertyValueFactory("maPhieu"));
 
-        TableColumn col2 = new TableColumn("Ten Nguoi Muon");
+        TableColumn col2 = new TableColumn("Ma Nguoi Muon");
         col2.setCellValueFactory(new PropertyValueFactory("maDG"));
 
         TableColumn col3 = new TableColumn("Ma Sach");
@@ -385,6 +375,7 @@ public class FXMLPhieuMuonController implements Initializable {
                     break;
                 case 1:
                     Utils.getBox("Muon thanh cong!", Alert.AlertType.INFORMATION).show();
+                                        
                     tbPhieuMuon.getItems().clear();
                     break;
                 default:

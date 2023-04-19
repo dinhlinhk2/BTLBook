@@ -60,4 +60,15 @@ public class FXMLChucNangController implements Initializable {
         stage.show();
         
     }
+    public void thongKeHandler(ActionEvent evt) throws IOException {
+        
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("FXMLThongKe.fxml"));
+
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("Thống kê");
+        stage.show();
+        
+    }
 }
