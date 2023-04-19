@@ -15,7 +15,7 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <Button layoutX="74.0" layoutY="98.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="167.0" text="Mượn">
+            <Button layoutX="74.0" layoutY="98.0" mnemonicParsing="false" onAction="#muonSachHandler" prefHeight="51.0" prefWidth="167.0" text="Mượn">
                <font>
                   <Font size="24.0" />
                </font>

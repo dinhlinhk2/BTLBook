@@ -38,14 +38,14 @@ public class FXMLChucNangController implements Initializable {
         stage.show();
         
     }
-    public void banSachHandler(ActionEvent evt) throws IOException {
+    public void muonSachHandler(ActionEvent evt) throws IOException {
         
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("FXMLSellMedicine.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("FXMLPhieuMuon.fxml"));
 
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
         stage.setScene(scene);
-        stage.setTitle("Ban Thuoc");
+        stage.setTitle("Muon Sach");
         stage.show();
         
     }

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="541.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ndl.btlbook.FXMLPhieuMuonController">
+   <children>
+      <Label text="Phiếu mượn sách">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <TabPane prefHeight="497.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Mượn">
+               <content>
+                  <Pane minHeight="-Infinity" prefHeight="55.0" prefWidth="600.0">
+                     <children>
+                        <Label layoutX="13.0" layoutY="94.0" text="Mã Nhân Viên">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="13.0" layoutY="158.0" text="Tác Giả">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="13.0" layoutY="126.0" text="Giá">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="13.0" layoutY="190.0" text="Số Lượng">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txtMaSach" layoutX="203.0" layoutY="2.0" />
+                        <TextField fx:id="txtTenSach" layoutX="203.0" layoutY="33.0" />
+                        <TextField fx:id="txtgia" layoutX="203.0" layoutY="129.0" />
+                        <TextField fx:id="txtSL" layoutX="203.0" layoutY="194.0" />
+                        <TextField fx:id="txtTimKiem" layoutX="202.0" layoutY="233.0" prefHeight="25.0" prefWidth="167.0" />
+                        <ComboBox fx:id="cbDocGia" layoutX="202.0" layoutY="65.0" prefWidth="150.0" />
+                        <ComboBox fx:id="cbNV" layoutX="202.0" layoutY="98.0" prefWidth="150.0" />
+                        <ComboBox fx:id="cbTacGia" layoutX="202.0" layoutY="162.0" prefWidth="150.0" />
+                        <ComboBox fx:id="cbLoaiTimKiem" layoutX="19.0" layoutY="233.0" prefWidth="150.0" />
+                        <Button fx:id="btnLamMoi" layoutX="404.0" layoutY="233.0" mnemonicParsing="false" text="Làm Mới" />
+                        <Label layoutX="15.0" layoutY="30.0" text="Tên Sách">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="13.0" layoutY="59.0" text="Mã Người Mượn">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="18.0" layoutY="-2.0" text="Mã Sách">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <TableView fx:id="tbSach" layoutX="12.0" layoutY="268.0" prefHeight="190.0" prefWidth="577.0" />
+                     </children>
+                  </Pane>
+               </content>
+          </Tab>
+          <Tab text="Chi Tiết Mượn">
+               <content>
+                  <Pane prefHeight="302.0" prefWidth="600.0">
+                     <children>
+                        <TableView fx:id="tbPhieuMuon" layoutX="-13.0" prefHeight="226.0" prefWidth="626.0" />
+                        <Button layoutX="14.0" layoutY="240.0" mnemonicParsing="false" onAction="#PhieuMuonHander" text="Mượn">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </Pane>
+               </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+   <padding>
+      <Insets top="10.0" />
+   </padding>
+</VBox>

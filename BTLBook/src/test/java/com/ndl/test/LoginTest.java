@@ -125,6 +125,49 @@ public class LoginTest {
 //            Logger.getLogger(LoginTest.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //    }
+    
+//    @Test
+//    public void testCheckUserNameExist() throws SQLException {
+//        Assertions.assertTrue(UserService.checkUsernameExist("admin"));
+//    }
+//    @Test
+//    @Order(1)
+//    public void testRegister() throws SQLException {
+//        User user = new User();
+//        
+//        user.setId(0);
+//        user.setUserName("nguyenanhdo2");
+//        user.setPassWord("c4ca4238a0b923820dcc509a6f75849b");
+//        user.setFirstName("hai");
+//        user.setLastName("Phan");
+//        user.setAddress("hcm");
+//        
+//        
+//        Assertions.assertTrue(s.dangKy(user));
+//        
+//        User newUser = UserService.getUserByUserName(user.getUserName());
+//        Assertions.assertNotNull(newUser);
+//        Assertions.assertNotEquals(user.getUserName(), newUser.getUserName());
+//    }  
+    @Test
+    @Order(1)
+    public void testRegister() throws SQLException {
+        User user = new User();
+        
+        user.setId(0);
+        user.setUserName("nguyenanhdo2");
+        user.setPassWord("c4ca4238a0b923820dcc509a6f75849b");
+        user.setFirstName("hai");
+        user.setLastName("Phan");
+        user.setAddress("hcm");
+        
+        
+        Assertions.assertTrue(s.dangKy(user));
+        
+//        User newUser = UserServices.getUserByUserName(user.getUserName());
+//        Assertions.assertNotNull(newUser);
+//        Assertions.assertNotEquals(user.getUserName(), newUser.getUserName());
+    }  
 
     private static class UserTest {
 

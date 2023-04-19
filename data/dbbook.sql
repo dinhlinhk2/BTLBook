@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `chitietphieumuon`;
 CREATE TABLE `chitietphieumuon` (
   `MaPhieuMuon` int NOT NULL,
   `TenSach` varchar(45) DEFAULT NULL,
-  `TenThanhVien` varchar(45) DEFAULT NULL,
+  `TenNguoiMuon` varchar(45) DEFAULT NULL,
   `SoLuongMuon` varchar(45) DEFAULT NULL,
   `GiaTien` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`MaPhieuMuon`)
@@ -67,7 +67,7 @@ CREATE TABLE `docgia` (
 
 LOCK TABLES `docgia` WRITE;
 /*!40000 ALTER TABLE `docgia` DISABLE KEYS */;
-INSERT INTO `docgia` VALUES (16,'test','2000-02-19','Nam','19/5a','0356987456',1,'dna');
+INSERT INTO `docgia` VALUES (1,'test','2000-02-19','Nam','19/5a','0356987456',1,'dna'),(2,'linh','2000-02-19','nữ','aa/5','0356636987',2,'cntt');
 /*!40000 ALTER TABLE `docgia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -130,11 +130,12 @@ CREATE TABLE `phieumuon` (
   `MaPhieu` int NOT NULL AUTO_INCREMENT,
   `ID_NM` int NOT NULL,
   `MaSach` int NOT NULL,
-  `MaTK` int NOT NULL,
-  `SoLuongMuon` varchar(45) NOT NULL,
-  `GiaTien` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`MaPhieu`,`ID_NM`,`MaSach`,`MaTK`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `SoLuongMuon` int NOT NULL,
+  `GiaTien` float NOT NULL,
+  `MaNV` int NOT NULL,
+  `NgayMuon` date NOT NULL,
+  PRIMARY KEY (`MaPhieu`,`ID_NM`,`MaSach`,`MaNV`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -143,6 +144,7 @@ CREATE TABLE `phieumuon` (
 
 LOCK TABLES `phieumuon` WRITE;
 /*!40000 ALTER TABLE `phieumuon` DISABLE KEYS */;
+INSERT INTO `phieumuon` VALUES (1,1,2,1,200000,0,'2023-04-19'),(2,2,11,1,50000,0,'2023-04-19');
 /*!40000 ALTER TABLE `phieumuon` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -268,7 +270,7 @@ CREATE TABLE `user` (
   `Address` varchar(45) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `Username_UNIQUE` (`Username`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -290,4 +292,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-18 22:30:00
+-- Dump completed on 2023-04-19 18:55:52

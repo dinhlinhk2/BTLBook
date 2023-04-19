@@ -14,6 +14,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.scene.control.Alert;
 
 /**
@@ -31,7 +33,7 @@ public class UserService {
             ResultSet rs = stm.executeQuery();
             
             if (rs.isBeforeFirst()) {
-                Utils.getBox("Trùng tên tài khoản!", Alert.AlertType.INFORMATION).show();
+//                Utils.getBox("Trùng tên tài khoản!", Alert.AlertType.INFORMATION).show();
                 return true;
             }
             return false;
@@ -82,7 +84,7 @@ public class UserService {
                 return newUser;
         }
     }
-    public boolean dangKy(User user) throws SQLException {
+    public boolean dangKy(User user) throws SQLException  {
         if(checkUsernameExist(user.getUserName()) == false){
             try (Connection conn = JdbcUtils.getConn()){
             PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO `user` "
@@ -96,11 +98,11 @@ public class UserService {
             preparedStatement.setString(5, user.getLastName());
             preparedStatement.setString(6, user.getAddress());
             preparedStatement.executeUpdate();  
-            Utils.getBox("Đăng ký tài khoản thành công!", Alert.AlertType.INFORMATION).show();
+//            Utils.getBox("Đăng ký tài khoản thành công!", Alert.AlertType.INFORMATION).show();
             return true;
         }
         }else{
-            Utils.getBox("Đăng ký tài khoản thất bại!", Alert.AlertType.INFORMATION).show();
+//            Utils.getBox("Đăng ký tài khoản thất bại!", Alert.AlertType.INFORMATION).show();
             return false;
         }
     }
@@ -150,6 +152,28 @@ public class UserService {
             }
             
             return user;
+        }
+    }
+    public List<User> getListUser() throws SQLException {
+        try (Connection conn = JdbcUtils.getConn()) {
+            PreparedStatement stm = conn.prepareStatement("SELECT * FROM user");
+            
+            ResultSet rs = stm.executeQuery();
+            List<User> listUser = new ArrayList<>();
+            
+            while (rs.next()) {                
+                int maUser = rs.getInt("ID");
+                String username = rs.getString("UserName");
+                String pass = rs.getString("Password");
+                String firstname = rs.getString("FirstName");
+                String lastname = rs.getString("LastName");
+                String add = rs.getString("Address");
+                
+                
+                listUser.add(new User(maUser, username,pass,firstname,lastname,add));
+            }
+            
+            return listUser;
         }
     }
     

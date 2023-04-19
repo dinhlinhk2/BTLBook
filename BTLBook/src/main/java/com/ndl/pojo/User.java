@@ -23,6 +23,13 @@ public class User {
         
     }
 
+    @Override
+    public String toString() {
+        return this.userName; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+    
+    
+
     public User(Integer id, String userName, String passWord, String firstName, String lastName, String address) {
         this.id = id;
         this.userName = userName;

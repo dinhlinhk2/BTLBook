@@ -8,8 +8,12 @@ import com.ndl.pojo.DocGia;
 import com.ndl.utils.JdbcUtils;
 import com.ndl.utils.Utils;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -101,6 +105,48 @@ public class DangKyDocGiaService {
         }
         
         return 0;
+    }
+    public List<DocGia> getListDocGia() throws SQLException{
+        try (Connection conn = JdbcUtils.getConn()) {
+            PreparedStatement stm = conn.prepareStatement("SELECT * FROM docgia");
+            
+            ResultSet rs = stm.executeQuery();
+            List<DocGia> listDG = new ArrayList<>();
+            
+            while (rs.next()) {                
+                int maDG = rs.getInt("ID_NM");
+                String tenDG = rs.getString("TenNguoiMuon");
+                Date ngaySinh = rs.getDate("NamSinh");
+                String gioiTinh = rs.getString("GioiTinh");
+                String diaChi = rs.getString("DiaChi");
+                String sdt = rs.getString("SDT");
+                Integer dt = rs.getInt("DoiTuong");
+                String bp = rs.getString("BoPhan");
+                
+                
+                listDG.add(new DocGia(maDG,tenDG,ngaySinh,gioiTinh,diaChi,sdt,dt,bp));
+            }
+            
+            return listDG;
+        }
+    }
+    public static DocGia getDocGiaById(Integer maDG) throws SQLException{
+        try (Connection conn = JdbcUtils.getConn()) {
+            PreparedStatement stm = conn.prepareStatement("SELECT * FROM `docgia` WHERE `ID_NM` = ?");
+            stm.setInt(1, maDG);
+            ResultSet rs = stm.executeQuery();
+            
+            DocGia dg= null;
+            while (rs.next()) {
+                dg = new DocGia();
+                dg.setId(rs.getInt("ID_NM"));
+                dg.setTenDG(rs.getString("TenNguoiMuon"));
+                break;
+            }
+            
+            return dg;
+        }
+        
     }
     
 }

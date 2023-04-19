@@ -20,6 +20,12 @@ public class DocGia {
     private String SDT;
     private Integer doiTuong;
     private String boPhan;
+
+    @Override
+    public String toString() {
+        return this.tenDG; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+    
     
     
     public DocGia(){
