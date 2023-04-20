@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
@@ -24,7 +27,17 @@
                </font>
             </Label>
             <ComboBox fx:id="cbGia" layoutX="123.0" layoutY="297.0" prefWidth="150.0" />
-            <BorderPane fx:id="tkGia" layoutX="39.0" layoutY="348.0" prefHeight="172.0" prefWidth="523.0" />
+            <BorderPane fx:id="tkGia" layoutX="39.0" layoutY="348.0" prefHeight="172.0" prefWidth="523.0">
+               <center>
+                  <LineChart fx:id="lineChart" BorderPane.alignment="CENTER">
+                    <xAxis>
+                      <CategoryAxis side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis side="LEFT" />
+                    </yAxis>
+                  </LineChart>
+               </center></BorderPane>
             <Label fx:id="lbgia" layoutX="392.0" layoutY="291.0" text="Giá">
                <font>
                   <Font size="25.0" />

@@ -6,6 +6,7 @@ package com.ndl.btlbook;
 
 import com.ndl.Services.PhieuMuonService;
 import com.ndl.pojo.ThongKe;
+import com.ndl.utils.Utils;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -14,8 +15,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -34,7 +37,7 @@ public class FXMLThongKeController implements Initializable {
     @FXML private ComboBox<Integer> cbGia;
     
     @FXML private BorderPane tkGia;
-    @FXML private Label lbgia;
+    @FXML private LineChart<String, Number> lineChart;
 
     /**
      * Initializes the controller class.
@@ -65,29 +68,29 @@ public class FXMLThongKeController implements Initializable {
         catch (Exception e) {
             e.printStackTrace();
         }
-        try {
-            Integer gia = 10000;
-            for(int i = gia; i >= gia; i--) {
-                cbGia.getItems().add(i--);
-            }
-            cbGia.setValue(gia);
-            
-            this.thongKeTheoGia(cbGia.getValue());
-         
-            
-            cbGia.valueProperty().addListener(evt -> {
-                try {
-                    this.thongKeTheoGia(cbGia.getValue());
-                    
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
-            });
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Integer gia = 10000;
+//            for(int i = gia; i >= gia; i--) {
+//                cbGia.getItems().add(i--);
+//            }
+//            cbGia.setValue(gia);
+//            
+//            this.thongKeTheoGia(cbGia.getValue());
+//         
+//            
+//            cbGia.valueProperty().addListener(evt -> {
+//                try {
+//                    this.thongKeTheoGia(cbGia.getValue());
+//                    
+//                }
+//                catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            });
+//        }
+//        catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }    
     private void thongKeTheoNam(Integer nam) throws SQLException {
         CategoryAxis xAxis = new CategoryAxis();
@@ -100,6 +103,7 @@ public class FXMLThongKeController implements Initializable {
         
         PhieuMuonService s = new PhieuMuonService();
         ThongKe tk = s.sumSellByYear(nam);
+
         
         XYChart.Series data = new XYChart.Series();
         data.setName("Thong ke theo nam");
@@ -111,25 +115,25 @@ public class FXMLThongKeController implements Initializable {
         tkNam.setCenter(barChart);
     }
     private void thongKeTheoGia(Integer gia) throws SQLException {
-        CategoryAxis xAxis = new CategoryAxis();
-        xAxis.setLabel("Giá");
-        
-        NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel("tổng giá mượn");
-        
-        BarChart barChart = new BarChart(xAxis, yAxis);
         
         PhieuMuonService s = new PhieuMuonService();
         ThongKe tk = s.sumSellByGia(gia);
-        
-        XYChart.Series data = new XYChart.Series();
-        data.setName("Thong ke theo gia tien");
-        
-        data.getData().add(new XYChart.Data(tk.getTongSL().toString(), tk.getTongSL()));
-        
-        barChart.getData().add(data);
-        barChart.setLegendVisible(false);
-        tkGia.setCenter(barChart);
+
+             XYChart.Series<String, Number> series = new XYChart.Series<>();
+            XYChart.Data<String, Number> jan = new XYChart.Data<>(tk.getNam().toString(), tk.getTongSL());
+            series.getData().add(jan);
+            lineChart.getData().add(series);
+
+//            XYChart.Series<String, Number> series = new XYChart.Series<>();
+//            XYChart.Data<String, Number> jan = new XYChart.Data<>("jan", tk.getTongSL());
+//            XYChart.Data<String, Number> feb = new XYChart.Data<>("feb", tk.getTongSL());
+//            series.getData().addAll(jan,feb);
+//            series.setName("thang");
+//            lineChart.getData().add(series);
+            
+            
+            
+
         
 
             

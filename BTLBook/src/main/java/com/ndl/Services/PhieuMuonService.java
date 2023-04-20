@@ -125,7 +125,6 @@ public class PhieuMuonService {
             while (rs.next()) {
                 tk = new ThongKe();
                 tk.setTongSL(rs.getInt("tonggia"));
-//                tk.setNam(rs.getInt("gia"));
             }
             return tk;
         }

@@ -110,18 +110,6 @@ public class FXMLPhieuMuonController implements Initializable {
 
                 this.txtMaSach.setText(Integer.toString(tbSach.getSelectionModel().getSelectedItem().getId()));
                 this.txtTenSach.setText(tbSach.getSelectionModel().getSelectedItem().getTenSach());
-//                int maNM = tbSach.getSelectionModel().getSelectedItem().getId();
-//                try {
-//                    DocGia dg = DangKyDocGiaService.getDocGiaById(maNM);
-//                    this.cbDocGia.setValue(dg);
-//                } catch (SQLException e) {
-//                }
-//                int maNV = tbSach.getSelectionModel().getSelectedItem().getId();
-//                try {
-//                    User u = UserService.getUserById(maNV);
-//                    this.cbNV.setValue(u);
-//                } catch (SQLException e) {
-//                }
                 this.txtgia.setText(Float.toString(tbSach.getSelectionModel().getSelectedItem().getGia()));
                 int maTG = tbSach.getSelectionModel().getSelectedItem().getId();
                 try {
@@ -320,7 +308,7 @@ public class FXMLPhieuMuonController implements Initializable {
         TableColumn col2 = new TableColumn("Ma Nguoi Muon");
         col2.setCellValueFactory(new PropertyValueFactory("maDG"));
 
-        TableColumn col3 = new TableColumn("Ma Sach");
+        TableColumn col3 = new TableColumn("Ten Sach");
         col3.setCellValueFactory(new PropertyValueFactory("maSach"));
 
         TableColumn col4 = new TableColumn("So luong");

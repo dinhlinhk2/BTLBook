@@ -17,6 +17,13 @@ public class Sach {
     private Float gia;
     private Integer maKS;
     private Integer maTG;
+
+    @Override
+    public String toString() {
+        return this.tenSach; // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+    
+    
     
     public Sach(){ 
         
